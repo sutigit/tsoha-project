@@ -12,6 +12,14 @@ CREATE TABLE games (
     votes INTEGER
 );
 
+CREATE TABLE messages (
+    id SERIAL PRIMARY KEY,
+    content TEXT,
+    user_id INTEGER REFERENCES users,
+    game_id INTEGER REFERENCES games
+    likes INTEGER
+);
+
 -- insert game 1
 INSERT INTO games (name, description, image, votes)
 VALUES (
