@@ -49,18 +49,38 @@
 
         <section class="py-2">
             <h2 class="px-2">Current leaders</h2>
-            <div class="light-background flex-horizontal">
-                <div class="game-card">
-                    <img src="" alt="">
-                    <h3>Name of the game</h3>
+            <div class="px-4 py-2 leaderboard">
+
+                <div class="leaderboard-background">
+                    {% set game = games[0] %}
+                    <img src={{ game.image }} alt={{ game.name }}>
                 </div>
-                <div class="game-card">
-                    <img src="" alt="">
-                    <h3>Name of the game</h3>
+
+                <div class="game-card top-1">
+                    {% set game = games[0] %}
+                    <img src={{ game.image }} alt={{ game.name }}>
+                    <div class="flex-horizontal gap-1">
+                        <div class="rank">1</div>
+                        <h3 class="light-color">{{ game.name }}</h3>
+                    </div>
                 </div>
-                <div class="game-card">
-                    <img src="" alt="">
-                    <h3>Name of the game</h3>
+
+                <div class="game-card top-2">
+                    {% set game = games[1] %}
+                    <img src={{ game.image }} alt={{ game.name }}>
+                    <div class="flex-horizontal gap-1">
+                        <div class="rank">2</div>
+                        <h3 class="light-color">{{ game.name }}</h3>
+                    </div>
+                </div>
+
+                <div class="game-card top-3">
+                    {% set game = games[2] %}
+                    <img src={{ game.image }} alt={{ game.name }}>
+                    <div class="flex-horizontal gap-1">
+                        <div class="rank">3</div>
+                        <h3 class="light-color">{{ game.name }}</h3>
+                    </div>
                 </div>
             </div>
         </section>
@@ -68,21 +88,23 @@
         <section class="p-2">
             <h2>Nominees</h2>
             <div>
+                {% for game in games %}
                 <div class="nominee-card py-2">
-                    <img src="" alt="">
+                    <img src={{ game.image }} alt={{ game.name }}>
                     <div class="nominee-card-info">
-                        <h3>Name of the game</h3>
-                        <p>Short description of the game</p>
+                        <h3>{{ game.name }}</h3>
+                        <p>{{ game.description }}</p>
                         <div>
                             <a href="/vote">
                                 <button>Vote</button>
                             </a>
-                            <a href="/gamepage">
+                            <a href="/gamepage/">
                                 <button>Read More</button>
                             </a>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
     </main>
 
