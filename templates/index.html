@@ -15,33 +15,95 @@
                 Home
             </a>
         </button>
+
         {% if session.username %}
         <div>
-            <span>
-                Welcome, {{ session.username }}
-            </span>
-            <button>
-                <a href="/logout">
+            <div>
+                Welcome, {{ session.username }}!
+            </div>
+            <a href="/logout">
+                <button>
                     Logout
-                </a>
-            </button>
+                </button>
+            </a>
         </div>
+
         {% else %}
         <div>
-            <button>
-                <a href="/login">
+            <a href="/login">
+                <button>
                     Login
-                </a>
-            </button>
-            <button>
-                <a href="/signup">
+                </button>
+            </a>
+            <a href="/signup">
+                <button>
                     Sign Up
-                </a>
-            </button>
+                </button>
+            </a>
         </div>
         {% endif %}
     </nav>
-    <h1>HY Game Awards</h1>
+
+    <main>
+        <h1>HY Game Awards</h1>
+
+        <section class="py-2">
+            <h2 class="px-2">Current leaders</h2>
+            <div class="light-background flex-horizontal">
+                <div class="game-card">
+                    <img src="" alt="">
+                    <h3>Name of the game</h3>
+                </div>
+                <div class="game-card">
+                    <img src="" alt="">
+                    <h3>Name of the game</h3>
+                </div>
+                <div class="game-card">
+                    <img src="" alt="">
+                    <h3>Name of the game</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-2">
+            <h2>Nominees</h2>
+            <div>
+                <div class="nominee-card py-2">
+                    <img src="" alt="">
+                    <div class="nominee-card-info">
+                        <h3>Name of the game</h3>
+                        <p>Short description of the game</p>
+                        <div>
+                            <button>Vote</button>
+                            <button>Read more</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="nominee-card py-2">
+                    <img src="" alt="">
+                    <div class="nominee-card-info">
+                        <h3>Name of the game</h3>
+                        <p>Short description of the game</p>
+                        <div>
+                            <button>Vote</button>
+                            <button>Read more</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="nominee-card py-2">
+                    <img src="" alt="">
+                    <div class="nominee-card-info">
+                        <h3>Name of the game</h3>
+                        <p>Short description of the game</p>
+                        <div>
+                            <button>Vote</button>
+                            <button>Read more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+
 </body>
 
 </html>
