@@ -18,12 +18,12 @@ nav {
 
 nav div {
     display: flex;
+    align-items: center;
     gap: 1em;
 }
 
 nav a {
     text-decoration: none;
-    color: black;
 }
 
 h1 {
@@ -34,6 +34,20 @@ h1 {
     padding-right: 2rem;
 }
 
+button {
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: slateblue;
+    cursor: pointer;
+    color: white;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
 .login-signup-page form {
     display: flex;
     flex-wrap: wrap;
@@ -42,18 +56,72 @@ h1 {
     padding-right: 2rem;
 }
 
+.game-card {
+    height: 20rem;
+    width: 15rem;
+    margin: 2rem 1rem;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game-card img {
+    border-radius: 3px;
+    overflow: hidden;
+    height: 80%;
+    width: 100%;
+    object-fit: cover;
+    background-color: lightgray;
+}
+
+.nominee-card {
+    display: flex;
+    gap: 1rem;
+
+}
+
+.nominee-card img {
+    border-radius: 3px;
+    overflow: hidden;
+    height: 20rem;
+    width: 15rem;
+    object-fit: cover;
+    background-color: lightgray;
+}
+
 .error {
     color: red;
 }
 
-.leaderboard {
-    margin-top: 2rem;
-}
-
 
 /* LAYOUT STYLES */
+.light-background {
+    background-color: lightcyan;
+}
+
+.dark-background {
+    background-color: darkcyan;
+}
+
+.flex-horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-scroll {
+    overflow-y: scroll;
+}
+
+.horizontal-scroll {
+    overflow-x: scroll;
+}
+
 .p-2 {
     padding: 2rem;
+}
+
+.py-2 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .px-2 {
