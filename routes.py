@@ -14,6 +14,11 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+
+        # Check form is not empty
+        if username == "" or password == "":
+            return render_template("login.html", error="Please fill in all fields")
+
         if users.login(username, password):
             return redirect("/")
         else:
