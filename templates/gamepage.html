@@ -47,12 +47,13 @@
     <main>
         <section class="p-2">
             <div class="game-page">
+                {% set game = game %}
                 <div>
-                    <img src="" alt="">
+                    <img src={{ game.image }} alt={{ game.name }}>
                 </div>
                 <div>
-                    <h2>Game name</h2>
-                    <p>description</p>
+                    <h2>{{ game.name }}</h2>
+                    <p>{{ game.description }}</p>
                     <button>Vote</button>
                 </div>
             </div>
