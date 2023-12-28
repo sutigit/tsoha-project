@@ -8,9 +8,15 @@ def get_games():
     result = db.session.execute(sql)
     return result.fetchall()
 
+# GET GAME BY ID
+def get_game(id):
+    sql = text("SELECT id, name, description, image FROM games WHERE id = :id")
+    result = db.session.execute(sql, {"id":id})
+    return result.fetchone()
+
 # GET LEADER GAMES TOP 3 by vote
 def get_leader_games():
-    sql = text("SELECT games.id, games.name, games.description, games.image, COUNT(votes.game_id) AS vote_count FROM games LEFT JOIN votes ON games.id = votes.game_id GROUP BY games.id ORDER BY vote_count DESC LIMIT 3")
+    sql = text("SELECT id, name, image FROM games ORDER BY votes DESC LIMIT 3")
     result = db.session.execute(sql)
     return result.fetchall()
 
