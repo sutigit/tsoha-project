@@ -1,6 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     margin: 0;
-    padding: 1em;
     box-sizing: border-box;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -10,6 +13,7 @@ nav {
 
     display: flex;
     justify-content: space-between;
+    padding: 2rem;
 }
 
 nav div {
@@ -24,16 +28,36 @@ nav a {
 
 h1 {
     font-size: 3rem;
-    margin-top: 5rem;
+    margin-top: 4rem;
     margin-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .login-signup-page form {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5em;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .error {
     color: red;
 }
+
+.leaderboard {
+    margin-top: 2rem;
+}
+
+
+/* LAYOUT STYLES */
+.p-2 {
+    padding: 2rem;
+}
+
+.px-2 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
