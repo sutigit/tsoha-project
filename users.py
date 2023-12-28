@@ -1,5 +1,5 @@
 from db import db
-from flask import redirect, render_template, request, session
+from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import text
 
@@ -30,7 +30,6 @@ def login(username, password):
 # LOGOUT
 def logout():
     del session["username"]
-    return redirect("/")
 
 
 # SIGNUP / CREATE NEW USER
