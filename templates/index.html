@@ -15,6 +15,18 @@
                 Home
             </a>
         </button>
+        {% if session.username %}
+        <div>
+            <span>
+                Welcome, {{ session.username }}
+            </span>
+            <button>
+                <a href="/logout">
+                    Logout
+                </a>
+            </button>
+        </div>
+        {% else %}
         <div>
             <button>
                 <a href="/login">
@@ -27,6 +39,7 @@
                 </a>
             </button>
         </div>
+        {% endif %}
     </nav>
     <h1>HY Game Awards</h1>
 </body>

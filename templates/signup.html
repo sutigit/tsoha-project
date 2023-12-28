@@ -1,12 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/main.css">
     <title>Sign Up</title>
 </head>
+
 <body>
-    
+    <nav>
+        <button>
+            <a href="/">
+                Home
+            </a>
+        </button>
+        <div>
+            <button>
+                <a href="/login">
+                    Login
+                </a>
+            </button>
+        </div>
+    </nav>
+
+    <main class="login-signup-page">
+        <h1>Sign Up</h1>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form action="/signup" method="POST">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password_again" placeholder="Confirm Password">
+            <button type="submit">Sign Up</button>
+        </form>
+    </main>
 </body>
+
 </html>
