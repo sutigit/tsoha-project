@@ -2,11 +2,12 @@ from app import app
 from flask import render_template, request, redirect
 import users
 
+# HOME PAGE
 @app.route("/")
 def index():
     return render_template("index.html")
 
-
+# LOGIN PAGE
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
@@ -24,11 +25,15 @@ def login():
         else:
             return render_template("login.html", error="Wrong username or password")
 
+# LOGOUT
 @app.route("/logout")
 def logout():
     users.logout()
     return redirect("/")
 
+
+
+# SIGNUP PAGE
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "GET":
@@ -54,3 +59,10 @@ def signup():
             return redirect("/")
         else:
             return render_template("error.html", error="Something went wrong :(")
+
+
+
+# GAME PAGE
+@app.route("/gamepage")
+def gamepage():
+    return render_template("gamepage.html")
