@@ -8,6 +8,10 @@ html, body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+img {
+    background-color: slateblue;
+}
+
 nav {
     width: 100%;
 
@@ -43,9 +47,24 @@ button {
     color: white;
 }
 
-button a {
+a {
     color: white;
     text-decoration: none;
+}
+
+.like-button {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.3rem;
+    background-color: white;
+    padding: 0.2rem 1rem;
+    border-radius: 100px;
+}
+
+.like-button a {
+    font-size: 1.5rem;
+    color: slateblue;
 }
 
 .login-signup-page form {
@@ -54,6 +73,26 @@ button a {
     gap: 0.5em;
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+.game-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.game-page img {
+    border-radius: 3px;
+    overflow: hidden;
+    height: 25rem;
+    width: 18rem;
+    object-fit: cover;
+}
+
+.game-page p {
+    max-height: 100%;
+    width: 100%;
+    overflow-y: auto;
 }
 
 .game-card {
@@ -70,7 +109,6 @@ button a {
     height: 80%;
     width: 100%;
     object-fit: cover;
-    background-color: lightgray;
 }
 
 .nominee-card {
@@ -85,7 +123,6 @@ button a {
     height: 20rem;
     width: 15rem;
     object-fit: cover;
-    background-color: lightgray;
 }
 
 .error {
@@ -107,12 +144,8 @@ button a {
     flex-direction: row;
 }
 
-.vertical-scroll {
-    overflow-y: scroll;
-}
-
-.horizontal-scroll {
-    overflow-x: scroll;
+.space-between {
+    justify-content: space-between;
 }
 
 .p-2 {
@@ -127,5 +160,27 @@ button a {
 .px-2 {
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+.m-2 {
+    margin: 2rem;
+}
+
+.my-2 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.mx-2 {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.theme-color {
+    color: slateblue;
 }
 
