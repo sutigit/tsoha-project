@@ -7,8 +7,7 @@ import games
 @app.route("/")
 def index():
     all_games = games.get_games()
-    leader_games = games.get_games()
-    # leader_games = games.get_leader_games()
+    leader_games = games.get_leader_games()
 
     return render_template("index.html", games=all_games, leader_games=leader_games)
 
@@ -68,6 +67,7 @@ def signup():
 
 
 # GAME PAGE
-@app.route("/gamepage")
-def gamepage():
-    return render_template("gamepage.html")
+@app.route("/gamepage/<int:id>")
+def gamepage(id):
+    game = games.get_game(id)
+    return render_template("gamepage.html", game=game)
