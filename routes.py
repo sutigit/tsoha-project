@@ -1,11 +1,16 @@
 from app import app
 from flask import render_template, request, redirect
 import users
+import games
 
 # HOME PAGE
 @app.route("/")
 def index():
-    return render_template("index.html")
+    all_games = games.get_games()
+    leader_games = games.get_games()
+    # leader_games = games.get_leader_games()
+
+    return render_template("index.html", games=all_games, leader_games=leader_games)
 
 # LOGIN PAGE
 @app.route("/login", methods=["GET", "POST"])
