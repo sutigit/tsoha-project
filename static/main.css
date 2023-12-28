@@ -10,6 +10,10 @@ html, body {
 
 img {
     background-color: slateblue;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 3px;
+    overflow: hidden;
 }
 
 nav {
@@ -82,11 +86,8 @@ a {
 }
 
 .game-page img {
-    border-radius: 3px;
-    overflow: hidden;
     height: 25rem;
     width: 18rem;
-    object-fit: cover;
 }
 
 .game-page p {
@@ -95,21 +96,93 @@ a {
     overflow-y: auto;
 }
 
+
+
+
+
+
+.leaderboard {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-end;
+}
+
+.leaderboard-background {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: brown;
+}
+
+.leaderboard-background img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.4;
+}
+
 .game-card {
-    height: 20rem;
-    width: 15rem;
-    margin: 2rem 1rem;
+    padding-top: 1rem;
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 1rem;
 }
 
 .game-card img {
-    border-radius: 3px;
-    overflow: hidden;
-    height: 80%;
-    width: 100%;
-    object-fit: cover;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
 }
+
+.game-card.top-1 img {
+    height: 25rem;
+    width: 18rem;    
+}
+
+.game-card.top-2 img {
+    height: 20rem;
+    width: 15rem;
+}
+
+.game-card.top-3 img {
+    height: 15rem;
+    width: 12rem;
+}
+
+.game-card.top-1 div h3 {
+    max-width: 13rem
+}
+
+.game-card.top-2 div h3 {
+    max-width: 9rem;
+}
+
+.game-card.top-3 div h3 {
+    max-width: 6rem;
+}
+
+.rank {
+    background-color: black;
+    border-radius: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.5rem;
+}
+
+
+
+
+
 
 .nominee-card {
     display: flex;
@@ -118,11 +191,8 @@ a {
 }
 
 .nominee-card img {
-    border-radius: 3px;
-    overflow: hidden;
     height: 20rem;
     width: 15rem;
-    object-fit: cover;
 }
 
 .error {
@@ -136,12 +206,16 @@ a {
 }
 
 .dark-background {
-    background-color: darkcyan;
+    background-color:blueviolet;
 }
 
 .flex-horizontal {
     display: flex;
     flex-direction: row;
+}
+
+.gap-1 {
+    gap: 1rem;
 }
 
 .space-between {
@@ -160,6 +234,11 @@ a {
 .px-2 {
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+.px-4 {
+    padding-left: 4rem;
+    padding-right: 4rem;
 }
 
 .m-2 {
@@ -184,3 +263,6 @@ a {
     color: slateblue;
 }
 
+.light-color {
+    color: white;
+}
