@@ -16,7 +16,7 @@ CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
     content TEXT,
     user_id INTEGER REFERENCES users,
-    game_id INTEGER REFERENCES games
+    game_id INTEGER REFERENCES games,
     likes INTEGER
 );
 
@@ -26,7 +26,7 @@ VALUES (
     'The Legend of Zelda: Breath of the Wild',
     'The Legend of Zelda: Breath of the Wild is an action-adventure game developed and published by Nintendo, released for the Nintendo Switch and Wii U consoles on March 3, 2017.',
     'https://upload.wikimedia.org/wikipedia/en/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg',
-    5
+    7
 );
 
 -- insert game 2
