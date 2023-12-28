@@ -52,12 +52,12 @@
             <div class="px-4 py-2 leaderboard">
 
                 <div class="leaderboard-background">
-                    {% set game = games[0] %}
+                    {% set game = leader_games[0] %}
                     <img src={{ game.image }} alt={{ game.name }}>
                 </div>
 
                 <div class="game-card top-1">
-                    {% set game = games[0] %}
+                    {% set game = leader_games[0] %}
                     <img src={{ game.image }} alt={{ game.name }}>
                     <div class="flex-horizontal gap-1">
                         <div class="rank">1</div>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="game-card top-2">
-                    {% set game = games[1] %}
+                    {% set game = leader_games[1] %}
                     <img src={{ game.image }} alt={{ game.name }}>
                     <div class="flex-horizontal gap-1">
                         <div class="rank">2</div>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="game-card top-3">
-                    {% set game = games[2] %}
+                    {% set game = leader_games[2] %}
                     <img src={{ game.image }} alt={{ game.name }}>
                     <div class="flex-horizontal gap-1">
                         <div class="rank">3</div>
