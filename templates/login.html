@@ -10,25 +10,25 @@
 
 <body>
     <nav>
-        <button>
-            <a href="/">
-                Home
-            </a>
-        </button>
-        <div>
+        <a href="/">
             <button>
-                <a href="/signup">
-                    Sign Up
-                </a>
+                Home
             </button>
+        </a>
+        <div>
+            <a href="/signup">
+                <button>
+                    Sign Up
+                </button>
+            </a>
         </div>
     </nav>
 
     <main class="login-signup-page">
         <h1>Login</h1>
-        
+
         {% if error %}
-        <p class="error">{{ error }}</p>
+        <p class="error px-2">{{ error }}</p>
         {% endif %}
 
         <form action="/login" method="POST">

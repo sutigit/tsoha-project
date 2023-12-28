@@ -10,17 +10,17 @@
 
 <body>
     <nav>
-        <button>
-            <a href="/">
-                Home
-            </a>
-        </button>
-        <div>
+        <a href="/">
             <button>
-                <a href="/login">
-                    Login
-                </a>
+                Home
             </button>
+        </a>
+        <div>
+            <a href="/login">
+                <button>
+                    Login
+                </button>
+            </a>
         </div>
     </nav>
 
@@ -28,7 +28,7 @@
         <h1>Sign Up</h1>
 
         {% if error %}
-        <p class="error">{{ error }}</p>
+        <p class="error px-2">{{ error }}</p>
         {% endif %}
 
         <form action="/signup" method="POST">
