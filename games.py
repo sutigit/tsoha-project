@@ -20,3 +20,10 @@ def get_leader_games():
     result = db.session.execute(sql)
     return result.fetchall()
 
+# VOTE A GAME
+def vote(id):
+    sql = text("UPDATE games SET votes = votes + 1 WHERE id = :id")
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
+
+    
