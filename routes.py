@@ -71,3 +71,10 @@ def signup():
 def gamepage(id):
     game = games.get_game(id)
     return render_template("gamepage.html", game=game)
+
+
+# VOTE A GAME
+@app.route("/vote/<int:id>", methods=["POST"])
+def vote(id):
+    games.vote(id)
+    return redirect(request.referrer)
