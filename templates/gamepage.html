@@ -10,11 +10,12 @@
 
 <body>
     <nav>
-        <button>
-            <a href="/">
+        <a href="/">
+            <button>
                 Home
-            </a>
-        </button>
+            </button>
+        </a>
+
 
         {% if session.username %}
         <div>
@@ -61,6 +62,14 @@
 
         <section class="p-2">
             <h2>Comments</h2>
+            <div>
+                <form action="/comment" method="POST">
+                    <div>
+                        <textarea class="textarea" name="comment" id="" rows="8"></textarea>
+                    </div>
+                    <button type="submit">Comment</button>
+                </form>
+            </div>
             <div>
                 <div class="p-2 my-2 light-background">
                     <div>

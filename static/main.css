@@ -88,6 +88,8 @@ a {
 .game-page img {
     height: 25rem;
     width: 18rem;
+    min-height: 25rem;
+    min-width: 18rem;
 }
 
 .game-page p {
@@ -141,28 +143,40 @@ a {
 .game-card.top-1 img {
     height: 25rem;
     width: 18rem;    
+    min-height: 25rem;
+    min-width: 18rem
 }
 
 .game-card.top-2 img {
     height: 20rem;
     width: 15rem;
+    min-height: 20rem;
+    min-width: 15rem
 }
 
 .game-card.top-3 img {
     height: 15rem;
     width: 12rem;
+    min-height: 15rem;
+    min-width: 12rem
 }
 
 .game-card.top-1 div h3 {
-    max-width: 13rem
+    margin: 0;
+    max-width: 13rem;
+    max-height: 3rem;
 }
 
 .game-card.top-2 div h3 {
+    margin: 0;
     max-width: 9rem;
+    max-height: 3rem;
 }
 
 .game-card.top-3 div h3 {
+    margin: 0;
     max-width: 6rem;
+    max-height: 3rem;
 }
 
 .rank {
@@ -193,10 +207,18 @@ a {
 .nominee-card img {
     height: 20rem;
     width: 15rem;
+    min-height: 20rem;
+    min-width: 15rem;
 }
 
 .error {
     color: red;
+}
+
+.textarea {
+    width: 100%;
+    padding: 1rem;
+    resize: none;
 }
 
 
@@ -216,6 +238,10 @@ a {
 
 .gap-1 {
     gap: 1rem;
+}
+
+.gap-05 {
+    gap: 0.5rem;
 }
 
 .space-between {
