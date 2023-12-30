@@ -1,5 +1,4 @@
 from db import db
-from flask import session
 from sqlalchemy import text
 
 # GET ALL GAMES

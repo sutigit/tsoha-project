@@ -46,9 +46,9 @@
     </nav>
 
     <main>
+        {% set game = game %}
         <section class="p-2">
             <div class="game-page">
-                {% set game = game %}
                 <div>
                     <img src={{ game.image }} alt={{ game.name }}>
                 </div>
@@ -82,12 +82,21 @@
         <section class="p-2">
             <h2>Comments</h2>
             <div>
-                <form action="/comment" method="POST">
+                {% if session.user_id %}
+                <form action="/chat/{{ game.id }}" method="POST">
                     <div>
-                        <textarea class="textarea" name="comment" id="" rows="8"></textarea>
+                        <textarea class="textarea" name="message" rows="8"></textarea>
                     </div>
-                    <button type="submit">Comment</button>
+                    <button type="submit">Post</button>
                 </form>
+                {% else %}
+                <div class="disabled">
+                    <div>
+                        <textarea class="textarea" name="message" rows="8" disabled>Please Log in to Chat</textarea>
+                    </div>
+                    <button style="pointer-events: none;">Post</button>
+                </div>
+                {% endif %}
             </div>
             <div>
                 <div class="p-2 my-2 light-background">

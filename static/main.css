@@ -229,6 +229,11 @@ a {
     color: white;
 }
 
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
 
 /* LAYOUT STYLES */
 .light-background {

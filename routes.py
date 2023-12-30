@@ -2,7 +2,10 @@ from app import app
 from flask import render_template, request, redirect, session
 import users
 import games
+import chat
 
+
+# ------- PAGE ROUTES -------
 # HOME PAGE
 @app.route("/")
 def index():
@@ -13,7 +16,17 @@ def index():
 
     return render_template("index.html", games=all_games, top3_games=top3_games)
 
+# GAME PAGE
+@app.route("/gamepage/<int:game_id>")
+def gamepage(game_id):
+    user_id = session.get("user_id")
+    game = games.get_game(game_id, user_id)
+    return render_template("gamepage.html", game=game)
 
+
+
+
+# ------- USER SIGNUP/LOGIN/LOGOUT ROUTES -------
 # LOGIN PAGE
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -37,8 +50,7 @@ def login():
 @app.route("/logout")
 def logout():
     users.logout()
-    return redirect("/")
-
+    return redirect(request.referrer)
 
 
 # SIGNUP PAGE
@@ -70,14 +82,8 @@ def signup():
 
 
 
-# GAME PAGE
-@app.route("/gamepage/<int:game_id>")
-def gamepage(game_id):
-    user_id = session.get("user_id")
-    game = games.get_game(game_id, user_id)
-    return render_template("gamepage.html", game=game)
 
-
+# ------- GAME VOTING ROUTES -------
 # VOTE A GAME
 @app.route("/vote/<int:game_id>", methods=["POST"])
 def vote(game_id):
@@ -91,7 +97,6 @@ def vote(game_id):
     if not users.user_in_db(user_id):
         return redirect("/login")
     
-    user_id = session["user_id"]
     games.vote(game_id, user_id)
     return redirect(request.referrer)
 
@@ -109,6 +114,25 @@ def unvote(game_id):
     if not users.user_in_db(user_id):
         return redirect("/login")
     
-    user_id = session["user_id"]
     games.unvote(game_id, user_id)
+    return redirect(request.referrer)
+
+
+
+# ------- GAME COMMENTING ROUTES -------
+# COMMENT A GAME
+@app.route("/chat/<int:game_id>", methods=["POST"])
+def comment(game_id):
+    user_id = session.get("user_id")
+
+    # check if user is logged in
+    if not user_id:
+        return redirect("/login")
+    
+    # check if user is in db
+    if not users.user_in_db(user_id):
+        return redirect("/login")
+    
+    message = request.form["message"]
+    chat.post_comment(game_id, user_id, message)
     return redirect(request.referrer)
