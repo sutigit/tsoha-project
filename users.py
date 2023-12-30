@@ -21,6 +21,7 @@ def login(username, password):
         else:
             # Check if the password is correct
             if check_password_hash(user.password, password):
+                session["user_id"] = user.id
                 session["username"] = username
                 return True
             else:
@@ -29,6 +30,7 @@ def login(username, password):
 
 # LOGOUT
 def logout():
+    del session["user_id"]
     del session["username"]
 
 
@@ -67,3 +69,20 @@ def username_available(username):
         return False
     else:
         return True
+    
+
+# CHECKS THAT USER IS IN DATABASE
+def user_in_db(user_id):
+    # Create a SQL query to check if the user_id exists
+    sql = text("SELECT id FROM users WHERE id=:user_id")
+    
+    # Execute the query
+    result = db.session.execute(sql, {"user_id":user_id})
+
+    # Save the query result in a variable
+    user = result.fetchone()
+
+    if user:
+        return True
+    else:
+        return False
