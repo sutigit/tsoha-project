@@ -8,7 +8,7 @@ def get_games(user_id):
             FROM games LEFT JOIN gamevotes ON games.id = gamevotes.game_id AND gamevotes.user_id = :user_id
             ORDER BY name;
         """)
-    
+        
     result = db.session.execute(sql, {"user_id":user_id})
     return result.fetchall()
 

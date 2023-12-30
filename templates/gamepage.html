@@ -99,6 +99,26 @@
                 {% endif %}
             </div>
             <div>
+                {% for message in messages %}
+                <div class="p-2 my-2 light-background">
+                    <div>
+                        <p>
+                            {{ message.message }}
+                        </p>
+                        <p class="italic theme-color">
+                            by {{ message.username }}
+                        </p>
+                    </div>
+                    <!-- <div class="like-button">
+                        <a href="/like">
+                            &hearts;
+                        </a>
+                        0
+                    </div> -->
+                </div>
+                {% endfor %}
+
+                <!-- default message -->
                 <div class="p-2 my-2 light-background">
                     <div>
                         <p>
@@ -108,12 +128,6 @@
                             by HY Game Awards
                         </p>
                     </div>
-                    <!-- <div class="like-button">
-                        <a href="/like">
-                            &hearts;
-                        </a>
-                        0
-                    </div> -->
                 </div>
             </div>
         </section>

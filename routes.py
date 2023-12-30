@@ -21,7 +21,9 @@ def index():
 def gamepage(game_id):
     user_id = session.get("user_id")
     game = games.get_game(game_id, user_id)
-    return render_template("gamepage.html", game=game)
+    messages = chat.get_messages(game_id)
+
+    return render_template("gamepage.html", game=game, messages=messages)
 
 
 

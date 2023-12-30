@@ -22,10 +22,10 @@ CREATE TABLE gamevotes (
 
 CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
-    created_at TIMESTAMP DEFAULT NOW()
+    created_at TIMESTAMP DEFAULT NOW(),
     user_id INTEGER REFERENCES users,
     game_id INTEGER REFERENCES games,
-    message TEXT,
+    message TEXT
 );
 
 CREATE TABLE messagelikes (
