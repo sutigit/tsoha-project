@@ -1,15 +1,20 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import users
 import games
 
 # HOME PAGE
 @app.route("/")
 def index():
+
     all_games = games.get_games()
     leader_games = games.get_leader_games()
 
-    return render_template("index.html", games=all_games, leader_games=leader_games)
+    user_id = session.get("user_id")
+    gameVotes = games.get_gamevotes_by_user(user_id)
+
+    return render_template("index.html", games=all_games, leader_games=leader_games, gameVotes=gameVotes)
+
 
 # LOGIN PAGE
 @app.route("/login", methods=["GET", "POST"])
@@ -28,6 +33,7 @@ def login():
             return redirect("/")
         else:
             return render_template("login.html", error="Wrong username or password")
+
 
 # LOGOUT
 @app.route("/logout")
@@ -66,15 +72,46 @@ def signup():
 
 
 
-# GAME PAGE
+# GAME PAGE§
 @app.route("/gamepage/<int:id>")
 def gamepage(id):
     game = games.get_game(id)
-    return render_template("gamepage.html", game=game)
+    user_id = session.get("user_id")
+    gameVotes = games.get_gamevotes_by_user(user_id)
+    return render_template("gamepage.html", game=game, gameVotes=gameVotes)
 
 
 # VOTE A GAME
-@app.route("/vote/<int:id>", methods=["POST"])
-def vote(id):
-    games.vote(id)
+@app.route("/vote/<int:game_id>", methods=["POST"])
+def vote(game_id):
+    user_id = session.get("user_id")
+
+    # check if user is logged in
+    if not user_id:
+        return redirect("/login")
+    
+    # check if user is in db
+    if not users.user_in_db(user_id):
+        return redirect("/login")
+    
+    user_id = session["user_id"]
+    games.vote(game_id, user_id)
+    return redirect(request.referrer)
+
+
+# UNVOTE A GAME
+@app.route("/unvote/<int:game_id>", methods=["POST"])
+def unvote(game_id):
+    user_id = session.get("user_id")
+
+    # check if user is logged in
+    if not user_id:
+        return redirect("/login")
+    
+    # check if user is in db
+    if not users.user_in_db(user_id):
+        return redirect("/login")
+    
+    user_id = session["user_id"]
+    games.unvote(game_id, user_id)
     return redirect(request.referrer)

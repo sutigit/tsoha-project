@@ -55,7 +55,28 @@
                 <div>
                     <h2>{{ game.name }}</h2>
                     <p>{{ game.description }}</p>
-                    <button>Vote</button>
+                    
+                    <div class="flex-horizontal gap-05">
+
+                        <!-- if game already voted -->
+                        {% if game.id in gameVotes %}
+                        <div class="flex-horizontal gap-05">
+                            <button class="voted">Voted</button>
+                            <form action="/unvote/{{ game.id }}" method="POST">
+                                <button type="submit">Undo</button>
+                            </form>
+                        </div>
+
+                        <!-- if game not yet voted -->
+                        {% else %}
+                        <div>
+                            <form action="/vote/{{ game.id }}" method="POST">
+                                <button type="submit">Vote</button>
+                            </form>
+                        </div>
+                        {% endif %}
+                        
+                    </div>
                 </div>
             </div>
         </section>

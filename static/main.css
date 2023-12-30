@@ -221,6 +221,13 @@ a {
     resize: none;
 }
 
+.voted {
+    pointer-events: none;
+    background-color: brown;
+    opacity: 0.5;
+    color: white;
+}
+
 
 /* LAYOUT STYLES */
 .light-background {
