@@ -16,7 +16,7 @@
             </button>
         </a>
 
-        {% if session.username %}
+        {% if session.user_id %}
         <div>
             <div>
                 Welcome, {{ session.username }}!
@@ -46,7 +46,6 @@
 
     <main>
         <h1>HY Game Awards</h1>
-
         <section class="py-2">
             <h2 class="px-2">Current leaders</h2>
             <div class="px-4 py-2 leaderboard">
@@ -56,32 +55,16 @@
                     <img src={{ game.image }} alt={{ game.name }}>
                 </div>
 
-                <div class="game-card top-1">
-                    {% set game = leader_games[0] %}
+                {% for game in leader_games %}
+                <div class="game-card top-{{ loop.index }}">
                     <img src={{ game.image }} alt={{ game.name }}>
                     <div class="flex-horizontal gap-1">
-                        <div class="rank">1</div>
+                        <div class="rank">{{ loop.index }}</div>
                         <h3 class="light-color">{{ game.name }}</h3>
                     </div>
                 </div>
+                {% endfor %}
 
-                <div class="game-card top-2">
-                    {% set game = leader_games[1] %}
-                    <img src={{ game.image }} alt={{ game.name }}>
-                    <div class="flex-horizontal gap-1">
-                        <div class="rank">2</div>
-                        <h3 class="light-color">{{ game.name }}</h3>
-                    </div>
-                </div>
-
-                <div class="game-card top-3">
-                    {% set game = leader_games[2] %}
-                    <img src={{ game.image }} alt={{ game.name }}>
-                    <div class="flex-horizontal gap-1">
-                        <div class="rank">3</div>
-                        <h3 class="light-color">{{ game.name }}</h3>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -96,12 +79,24 @@
                         <p>{{ game.description }}</p>
                         <div class="flex-horizontal gap-05">
 
-                    
-                            <form action="/vote/{{ game.id }}" method="POST">
-                                <button type="submit">Vote</button>
-                            </form>
+                            <!-- if game already voted -->
+                            {% if game.id in gameVotes %}
+                            <div class="flex-horizontal gap-05">
+                                <button class="voted">Voted</button>
+                                <form action="/unvote/{{ game.id }}" method="POST">
+                                    <button type="submit">Undo</button>
+                                </form>
+                            </div>
 
-
+                            <!-- if game not yet voted -->
+                            {% else %}
+                            <div>
+                                <form action="/vote/{{ game.id }}" method="POST">
+                                    <button type="submit">Vote</button>
+                                </form>
+                            </div>
+                            {% endif %}
+                            
                             <a href="/gamepage/{{ game.id }}">
                                 <button>Read More</button>
                             </a>
