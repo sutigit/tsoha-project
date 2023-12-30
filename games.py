@@ -5,7 +5,7 @@ from sqlalchemy import text
 def get_games(user_id):
     sql = text("""
             SELECT games.id, games.name, games.description, games.image, gamevotes.user_id = :user_id AS voted
-            FROM games LEFT JOIN gamevotes ON games.id = gamevotes.game_id
+            FROM games LEFT JOIN gamevotes ON games.id = gamevotes.game_id AND gamevotes.user_id = :user_id
             ORDER BY name;
         """)
     
@@ -17,7 +17,7 @@ def get_games(user_id):
 def get_game(game_id, user_id):
     sql = text("""
             SELECT games.id, games.name, games.description, games.image, gamevotes.user_id = :user_id AS voted
-            FROM games LEFT JOIN gamevotes ON games.id = gamevotes.game_id
+            FROM games LEFT JOIN gamevotes ON games.id = gamevotes.game_id AND gamevotes.user_id = :user_id
             WHERE games.id = :game_id;
         """)
     
@@ -51,6 +51,20 @@ def vote(game_id, user_id):
     db.session.execute(sql, {"game_id":game_id, "user_id":user_id})
     db.session.commit()
 
+# CHECK IF USER HAS ALREADY VOTED
+def has_been_voted(game_id, user_id):
+    sql = text("""
+            SELECT id
+            FROM gamevotes
+            WHERE game_id = :game_id AND user_id = :user_id
+        """)
+    
+    result = db.session.execute(sql, {"game_id":game_id, "user_id":user_id})
+
+    if result.fetchone():
+        return True
+    else:
+        return False
 
 # UNVOTE A GAME
 def unvote(game_id, user_id):

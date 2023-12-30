@@ -97,6 +97,10 @@ def vote(game_id):
     if not users.user_in_db(user_id):
         return redirect("/login")
     
+    # check if user has already voted
+    if games.has_been_voted(game_id, user_id):
+        return redirect(request.referrer)
+    
     games.vote(game_id, user_id)
     return redirect(request.referrer)
 
