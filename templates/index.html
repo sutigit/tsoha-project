@@ -51,11 +51,11 @@
             <div class="px-4 py-2 leaderboard">
 
                 <div class="leaderboard-background">
-                    {% set game = leader_games[0] %}
+                    {% set game = top3_games[0] %}
                     <img src={{ game.image }} alt={{ game.name }}>
                 </div>
 
-                {% for game in leader_games %}
+                {% for game in top3_games %}
                 <div class="game-card top-{{ loop.index }}">
                     <img src={{ game.image }} alt={{ game.name }}>
                     <div class="flex-horizontal gap-1">

@@ -6,14 +6,12 @@ import games
 # HOME PAGE
 @app.route("/")
 def index():
-
-    all_games = games.get_games()
-    leader_games = games.get_leader_games()
-
     user_id = session.get("user_id")
-    gameVotes = games.get_gamevotes_by_user(user_id)
 
-    return render_template("index.html", games=all_games, leader_games=leader_games, gameVotes=gameVotes)
+    all_games = games.get_games(user_id)
+    top3_games = games.get_top3_games()
+
+    return render_template("index.html", games=all_games, top3_games=top3_games)
 
 
 # LOGIN PAGE
@@ -72,13 +70,12 @@ def signup():
 
 
 
-# GAME PAGE§
-@app.route("/gamepage/<int:id>")
-def gamepage(id):
-    game = games.get_game(id)
+# GAME PAGE
+@app.route("/gamepage/<int:game_id>")
+def gamepage(game_id):
     user_id = session.get("user_id")
-    gameVotes = games.get_gamevotes_by_user(user_id)
-    return render_template("gamepage.html", game=game, gameVotes=gameVotes)
+    game = games.get_game(game_id, user_id)
+    return render_template("gamepage.html", game=game)
 
 
 # VOTE A GAME
