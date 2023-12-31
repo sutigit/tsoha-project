@@ -83,7 +83,7 @@
             <h2>Comments</h2>
             <div>
                 {% if session.user_id %}
-                <form action="/chat/{{ game.id }}" method="POST">
+                <form action="/postmessage/{{ game.id }}" method="POST">
                     <div>
                         <textarea class="textarea" name="message" rows="8"></textarea>
                     </div>
@@ -109,12 +109,22 @@
                             by {{ message.username }}
                         </p>
                     </div>
-                    <!-- <div class="like-button">
+                    
+                    <!-- {% if message.liked %}
+                    <div class="like-button">
                         <a href="/like">
-                            &hearts;
+                            &#9825;
                         </a>
                         0
-                    </div> -->
+                    </div>
+                    {% else %}
+                    <div class="like-button">
+                        <a href="/unlike">
+                            &#9829;
+                        </a>
+                        0
+                    </div>
+                    {% endif %} -->
                 </div>
                 {% endfor %}
 

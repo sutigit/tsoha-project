@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, request, redirect, session
 import users
 import games
-import chat
+import chats
 
 
 # ------- PAGE ROUTES -------
@@ -21,7 +21,7 @@ def index():
 def gamepage(game_id):
     user_id = session.get("user_id")
     game = games.get_game(game_id, user_id)
-    messages = chat.get_messages(game_id)
+    messages = chats.get_messages(game_id)
 
     return render_template("gamepage.html", game=game, messages=messages)
 
@@ -127,8 +127,8 @@ def unvote(game_id):
 
 # ------- GAME COMMENTING ROUTES -------
 # COMMENT A GAME
-@app.route("/chat/<int:game_id>", methods=["POST"])
-def comment(game_id):
+@app.route("/postmessage/<int:game_id>", methods=["POST"])
+def postmessage(game_id):
     user_id = session.get("user_id")
 
     # check if user is logged in
@@ -140,5 +140,5 @@ def comment(game_id):
         return redirect("/login")
     
     message = request.form["message"]
-    chat.post_comment(game_id, user_id, message)
+    chats.post_message(game_id, user_id, message)
     return redirect(request.referrer)
