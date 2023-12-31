@@ -1,3 +1,4 @@
+/* GENERAL COMPONENT STYLES  */
 * {
     box-sizing: border-box;
 }
@@ -57,6 +58,8 @@ a {
     text-decoration: none;
 }
 
+
+/* COMPONENT STYLES */
 .like-button {
     display: inline-block;
     background-color: white;
@@ -110,10 +113,6 @@ a {
     width: 100%;
     overflow-y: auto;
 }
-
-
-
-
 
 
 .leaderboard {
@@ -206,11 +205,6 @@ a {
     font-size: 1.5rem;
 }
 
-
-
-
-
-
 .nominee-card {
     display: flex;
     gap: 1rem;
@@ -245,6 +239,7 @@ a {
     pointer-events: none;
     opacity: 0.6;
 }
+
 
 
 /* LAYOUT STYLES */
