@@ -90,21 +90,17 @@ def signup():
 @app.route("/vote/<int:game_id>", methods=["POST"])
 def vote(game_id):
     user_id = session.get("user_id")
-
-    # check if user is logged in
-    if not user_id:
-        return redirect("/login")
-    
-    # check if user is in db
-    if not users.user_in_db(user_id):
-        return redirect("/login")
     
     # check if user has already voted
     if games.has_been_voted(game_id, user_id):
         return redirect(request.referrer)
     
-    games.vote(game_id, user_id)
-    return redirect(request.referrer)
+
+    if users.user_is_logged_in(user_id):
+        games.vote(game_id, user_id)
+        return redirect(request.referrer)
+    else:
+        return redirect("/login")
 
 
 # UNVOTE A GAME
@@ -112,16 +108,12 @@ def vote(game_id):
 def unvote(game_id):
     user_id = session.get("user_id")
 
-    # check if user is logged in
-    if not user_id:
+    if users.user_is_logged_in(user_id):
+        games.unvote(game_id, user_id)
+        return redirect(request.referrer)
+    else:
         return redirect("/login")
-    
-    # check if user is in db
-    if not users.user_in_db(user_id):
-        return redirect("/login")
-    
-    games.unvote(game_id, user_id)
-    return redirect(request.referrer)
+
 
 
 
@@ -131,46 +123,38 @@ def unvote(game_id):
 def postmessage(game_id):
     user_id = session.get("user_id")
 
-    # check if user is logged in
-    if not user_id:
+    if users.user_is_logged_in(user_id):
+        message = request.form["message"]
+        chats.post_message(game_id, user_id, message)
+        return redirect(request.referrer)
+    else:
         return redirect("/login")
-    
-    # check if user is in db
-    if not users.user_in_db(user_id):
-        return redirect("/login")
-    
-    message = request.form["message"]
-    chats.post_message(game_id, user_id, message)
-    return redirect(request.referrer)
 
 # LIKE A MESSAGE
 @app.route("/like/<int:message_id>", methods=["POST"])
 def like(message_id):
     user_id = session.get("user_id")
 
-    # check if user is logged in
-    if not user_id:
+    # check if user has already liked
+    if chats.message_has_been_liked(message_id, user_id):
+        return redirect(request.referrer)
+
+    if users.user_is_logged_in(user_id):
+        chats.like_message(message_id, user_id)
+        return redirect(request.referrer)
+    else:
         return redirect("/login")
-    
-    # check if user is in db
-    if not users.user_in_db(user_id):
-        return redirect("/login")
-    
-    chats.like_message(message_id, user_id)
-    return redirect(request.referrer)
 
 # UNLIKE A MESSAGE
 @app.route("/unlike/<int:message_id>", methods=["POST"])
 def unlike(message_id):
     user_id = session.get("user_id")
 
-    # check if user is logged in
-    if not user_id:
+    if users.user_is_logged_in(user_id):
+        chats.unlike_message(message_id, user_id)
+        return redirect(request.referrer)
+    else:
         return redirect("/login")
     
-    # check if user is in db
-    if not users.user_in_db(user_id):
-        return redirect("/login")
-    
-    chats.unlike_message(message_id, user_id)
-    return redirect(request.referrer)
+
+
