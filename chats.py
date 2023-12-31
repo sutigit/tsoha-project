@@ -13,15 +13,19 @@ def post_message(game_id, user_id, message):
 
 
 # GET ALL MESSAGES
-def get_messages(game_id):
+def get_messages(game_id, user_id):
     sql = text("""
-            SELECT users.username, messages.message
-            FROM messages LEFT JOIN users ON users.id = messages.user_id
+            SELECT messages.id, users.username, messages.message,
+            (SELECT COUNT(messagelikes.message_id) FROM messagelikes WHERE messagelikes.message_id = messages.id) AS likes,
+            messagelikes.user_id = :user_id AS liked
+            FROM messages
+            LEFT JOIN users ON messages.user_id = users.id
+            LEFT JOIN messagelikes ON messages.id = messagelikes.message_id AND messagelikes.user_id = :user_id
             WHERE messages.game_id = :game_id
             ORDER BY messages.created_at DESC
         """)
     
-    result = db.session.execute(sql, {"game_id":game_id})
+    result = db.session.execute(sql, {"game_id":game_id, "user_id":user_id})
     return result.fetchall()
 
 

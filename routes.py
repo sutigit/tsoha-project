@@ -21,7 +21,7 @@ def index():
 def gamepage(game_id):
     user_id = session.get("user_id")
     game = games.get_game(game_id, user_id)
-    messages = chats.get_messages(game_id)
+    messages = chats.get_messages(game_id, user_id)
 
     return render_template("gamepage.html", game=game, messages=messages)
 
@@ -125,7 +125,7 @@ def unvote(game_id):
 
 
 
-# ------- GAME COMMENTING ROUTES -------
+# ------- MESSAGE ROUTES -------
 # COMMENT A GAME
 @app.route("/postmessage/<int:game_id>", methods=["POST"])
 def postmessage(game_id):
@@ -141,4 +141,36 @@ def postmessage(game_id):
     
     message = request.form["message"]
     chats.post_message(game_id, user_id, message)
+    return redirect(request.referrer)
+
+# LIKE A MESSAGE
+@app.route("/like/<int:message_id>", methods=["POST"])
+def like(message_id):
+    user_id = session.get("user_id")
+
+    # check if user is logged in
+    if not user_id:
+        return redirect("/login")
+    
+    # check if user is in db
+    if not users.user_in_db(user_id):
+        return redirect("/login")
+    
+    chats.like_message(message_id, user_id)
+    return redirect(request.referrer)
+
+# UNLIKE A MESSAGE
+@app.route("/unlike/<int:message_id>", methods=["POST"])
+def unlike(message_id):
+    user_id = session.get("user_id")
+
+    # check if user is logged in
+    if not user_id:
+        return redirect("/login")
+    
+    # check if user is in db
+    if not users.user_in_db(user_id):
+        return redirect("/login")
+    
+    chats.unlike_message(message_id, user_id)
     return redirect(request.referrer)

@@ -14,7 +14,6 @@ CREATE TABLE games (
 );
 
 CREATE TABLE gamevotes (
-    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
     game_id INTEGER REFERENCES games
 );
@@ -29,7 +28,6 @@ CREATE TABLE messages (
 );
 
 CREATE TABLE messagelikes (
-    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
     message_id INTEGER REFERENCES messages
 );

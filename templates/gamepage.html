@@ -109,22 +109,19 @@
                             by {{ message.username }}
                         </p>
                     </div>
-                    
-                    <!-- {% if message.liked %}
-                    <div class="like-button">
-                        <a href="/like">
-                            &#9825;
-                        </a>
-                        0
-                    </div>
+                    {% if message.liked %}
+                    <form class="unlike-button" action="/unlike/{{ message.id }}" method="POST">
+                        <button type="submit">
+                            &#9829; unlike | {{ message.likes or 0 }}
+                        </button>
+                    </form>                        
                     {% else %}
-                    <div class="like-button">
-                        <a href="/unlike">
-                            &#9829;
-                        </a>
-                        0
-                    </div>
-                    {% endif %} -->
+                    <form class="like-button" action="/like/{{ message.id }}" method="POST">
+                        <button type="submit">
+                            &#9829; like | {{ message.likes or 0 }}
+                        </button>
+                    </form>                        
+                    {% endif %}
                 </div>
                 {% endfor %}
 

@@ -58,13 +58,25 @@ a {
 }
 
 .like-button {
-    display: inline-flex;
-    align-items: center;
-    align-self: flex-start;
-    gap: 0.3rem;
+    display: inline-block;
     background-color: white;
-    padding: 0.2rem 1rem;
     border-radius: 100px;
+}
+
+.like-button button {
+    background-color: transparent;
+    color: slateblue;
+}
+
+.unlike-button {
+    display: inline-block;
+    background-color: white;
+    border-radius: 100px;
+}
+
+.unlike-button button {
+    background-color: transparent;
+    color: brown;
 }
 
 .like-button a {
