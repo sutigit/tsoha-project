@@ -54,7 +54,8 @@ def unlike_message(message_id, user_id):
 # CHECK IF MESSAGE HAS BEEN LIKED
 def message_has_been_liked(message_id, user_id):
     sql = text("""
-            SELECT id FROM messagelikes
+            SELECT message_id 
+            FROM messagelikes
             WHERE message_id = :message_id AND user_id = :user_id
         """)
     

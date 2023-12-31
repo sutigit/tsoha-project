@@ -54,7 +54,7 @@ def vote(game_id, user_id):
 # CHECK IF USER HAS ALREADY VOTED
 def has_been_voted(game_id, user_id):
     sql = text("""
-            SELECT id
+            SELECT game_id
             FROM gamevotes
             WHERE game_id = :game_id AND user_id = :user_id
         """)

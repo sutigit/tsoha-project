@@ -87,6 +87,8 @@ def user_in_db(user_id):
     else:
         return False
     
+
+# CHECKS THAT USER IS LOGGED IN    
 def user_is_logged_in(user_id):
     if user_id and user_in_db(user_id): 
         return True
