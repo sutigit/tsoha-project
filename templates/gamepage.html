@@ -64,6 +64,7 @@
                         <div class="flex-horizontal gap-05">
                             <button class="voted">Voted</button>
                             <form action="/unvote/{{ game.id }}" method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                                 <button type="submit">Undo</button>
                             </form>
                         </div>
@@ -71,6 +72,7 @@
                         {% else %}
                         <div>
                             <form action="/vote/{{ game.id }}" method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                                 <button type="submit">Vote</button>
                             </form>
                         </div>
@@ -90,6 +92,7 @@
                     <div>
                         <textarea class="textarea" name="message" maxlength="2000" rows="8"></textarea>
                     </div>
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                     <button type="submit">Post</button>
                 </form>
                 {% else %}
@@ -114,12 +117,14 @@
                     </div>
                     {% if message.liked %}
                     <form class="unlike-button" action="/unlike/{{ message.id }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                         <button type="submit">
                             &#9829; unlike | {{ message.likes or 0 }}
                         </button>
                     </form>                        
                     {% else %}
                     <form class="like-button" action="/like/{{ message.id }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                         <button type="submit">
                             &#9829; like | {{ message.likes or 0 }}
                         </button>
@@ -148,7 +153,7 @@
 <script>
     function check(form) {
         if (form.message.value.length > 2000) {
-            alert("Viesti on liian pitkä");
+            alert("Message is too long!");
             return false;
         }
         return true;

@@ -101,6 +101,11 @@ def vote(game_id):
     
 
     if users.user_is_logged_in(user_id):
+
+        # check for CSRF attack
+        if request.form["csrf_token"] != session.get("csrf_token"):
+            return render_template("error.html", error="Something went wrong :(")
+
         games.vote(game_id, user_id)
         return redirect(request.referrer)
     else:
@@ -113,6 +118,11 @@ def unvote(game_id):
     user_id = session.get("user_id")
 
     if users.user_is_logged_in(user_id):
+
+        # check for CSRF attack
+        if request.form["csrf_token"] != session.get("csrf_token"):
+            return render_template("error.html", error="Something went wrong :(")
+
         games.unvote(game_id, user_id)
         return redirect(request.referrer)
     else:
@@ -132,10 +142,16 @@ def postmessage(game_id):
         return redirect(request.referrer)
 
     if users.user_is_logged_in(user_id):
+
+        # check for CSRF attack
+        if request.form["csrf_token"] != session.get("csrf_token"):
+            return render_template("error.html", error="Something went wrong :(")
+        
         chats.post_message(game_id, user_id, message)
         return redirect(request.referrer)
     else:
         return redirect("/login")
+
 
 # LIKE A MESSAGE
 @app.route("/like/<int:message_id>", methods=["POST"])
@@ -147,10 +163,16 @@ def like(message_id):
         return redirect(request.referrer)
 
     if users.user_is_logged_in(user_id):
+
+        # check for CSRF attack
+        if request.form["csrf_token"] != session.get("csrf_token"):
+            return render_template("error.html", error="Something went wrong :(")
+        
         chats.like_message(message_id, user_id)
         return redirect(request.referrer)
     else:
         return redirect("/login")
+
 
 # UNLIKE A MESSAGE
 @app.route("/unlike/<int:message_id>", methods=["POST"])
@@ -158,6 +180,11 @@ def unlike(message_id):
     user_id = session.get("user_id")
 
     if users.user_is_logged_in(user_id):
+
+        # check for CSRF attack
+        if request.form["csrf_token"] != session.get("csrf_token"):
+            return render_template("error.html", error="Something went wrong :(")
+        
         chats.unlike_message(message_id, user_id)
         return redirect(request.referrer)
     else:
@@ -165,3 +192,8 @@ def unlike(message_id):
     
 
 
+# ------- ERROR ROUTES -------
+# ERROR PAGE
+@app.route("/error")
+def error():
+    return render_template("error.html", error="Something went wrong :(")

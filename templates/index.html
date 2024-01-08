@@ -83,6 +83,7 @@
                             <div class="flex-horizontal gap-05">
                                 <button class="voted">Voted</button>
                                 <form action="/unvote/{{ game.id }}" method="POST">
+                                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                                     <button type="submit">Undo</button>
                                 </form>
                             </div>
@@ -90,6 +91,7 @@
                             {% else %}
                             <div>
                                 <form action="/vote/{{ game.id }}" method="POST">
+                                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                                     <button type="submit">Vote</button>
                                 </form>
                             </div>
