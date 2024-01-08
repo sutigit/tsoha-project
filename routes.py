@@ -68,6 +68,10 @@ def signup():
         # Check that username and password are at least 3 characters long
         if len(username) < 3 or len(password) < 3:
             return render_template("signup.html", error="Username and password must be at least 3 characters long")
+        
+        # Check that username and password dont exceed 15 and 30 characters respectively
+        if len(username) > 15 or len(password) > 30:
+            return render_template("signup.html", error="Username must not exceed 15 characters and password must not exceed 30 characters")
 
         # Check that username is available
         if not users.username_available(username):

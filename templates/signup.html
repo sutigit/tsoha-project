@@ -32,8 +32,8 @@
         {% endif %}
 
         <form action="/signup" method="POST">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
+            <input type="text" name="username" placeholder="Username" maxlength="15">
+            <input type="password" name="password" placeholder="Password" maxlength="60"> 
             <input type="password" name="password_again" placeholder="Confirm Password">
             <button type="submit">Sign Up</button>
         </form>
