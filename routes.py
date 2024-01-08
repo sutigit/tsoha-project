@@ -80,7 +80,7 @@ def signup():
         if users.signup(username, password):
             return redirect("/")
         else:
-            return render_template("error.html", error="Something went wrong :(")
+            return render_template("signup.html", error="Something went wrong :(")
 
 
 
@@ -122,9 +122,12 @@ def unvote(game_id):
 @app.route("/postmessage/<int:game_id>", methods=["POST"])
 def postmessage(game_id):
     user_id = session.get("user_id")
+    message = request.form["message"]
+
+    if len(message) > 2000:
+        return redirect(request.referrer)
 
     if users.user_is_logged_in(user_id):
-        message = request.form["message"]
         chats.post_message(game_id, user_id, message)
         return redirect(request.referrer)
     else:

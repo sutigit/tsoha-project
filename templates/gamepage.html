@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <!-- NAVIGATION BAR -->
     <nav>
         <a href="/">
             <button>
@@ -45,6 +46,7 @@
         {% endif %}
     </nav>
 
+    <!-- GAME DETAILS SECTION -->
     <main>
         {% set game = game %}
         <section class="p-2">
@@ -79,13 +81,14 @@
             </div>
         </section>
 
+        <!-- COMMENT SECTION -->
         <section class="p-2">
             <h2>Comments</h2>
             <div>
                 {% if session.user_id %}
-                <form action="/postmessage/{{ game.id }}" method="POST">
+                <form action="/postmessage/{{ game.id }}" method="POST" onsubmit="return check(this)">
                     <div>
-                        <textarea class="textarea" name="message" rows="8"></textarea>
+                        <textarea class="textarea" name="message" maxlength="2000" rows="8"></textarea>
                     </div>
                     <button type="submit">Post</button>
                 </form>
@@ -141,5 +144,15 @@
 
     </main>
 </body>
+
+<script>
+    function check(form) {
+        if (form.message.value.length > 2000) {
+            alert("Viesti on liian pitkä");
+            return false;
+        }
+        return true;
+    }
+    </script>
 
 </html>
