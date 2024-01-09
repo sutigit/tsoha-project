@@ -1,99 +1,85 @@
-from db import db
+"""This module contains functions for user management."""
+
+import secrets
+
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import text
-import secrets
+
+from db import db
 
 
-# LOGIN
-def login(username, password): 
-        # Create a SQL query to check if the username exists
-        sql = text("SELECT id, password FROM users WHERE username=:username")
+def login(username, password):
+    """Check if the username and password are correct and log the user in if they are."""
 
-        # Execute the query
-        result = db.session.execute(sql, {"username":username})
-        
-        # Save the query result in a variable
-        user = result.fetchone()    
+    sql = text("SELECT id, password FROM users WHERE username=:username")
+    result = db.session.execute(sql, {"username":username})
+    user = result.fetchone()
 
-        # Check if the username exists
-        if not user:
-            return False
-        else:
-            # Check if the password is correct
-            if check_password_hash(user.password, password):
-                session["user_id"] = user.id
-                session["username"] = username
-                session["csrf_token"] = secrets.token_hex(16)
-                return True
-            else:
-                return False
-        
+    if not user:
+        return False
 
-# LOGOUT
+    if check_password_hash(user.password, password):
+        session["user_id"] = user.id
+        session["username"] = username
+        session["csrf_token"] = secrets.token_hex(16)
+        return True
+
+    return False
+
+
 def logout():
+    """Log the user out."""
     del session["user_id"]
     del session["username"]
     del session["csrf_token"]
 
 
-# SIGNUP / CREATE NEW USER
 def signup(username, password):
-    # Hash the password
+    """Create a new user and log them in."""
+
     hash_value = generate_password_hash(password)
-    
+
     try:
-        # Create a SQL query to insert the new user
         sql = text("INSERT INTO users (username,password) VALUES (:username,:password)")
-        
-        # Execute the query
         db.session.execute(sql, {"username":username, "password":hash_value})
         db.session.commit()
-    except:
+    except ConnectionError:
         return False
-    
-    # Log the user in
+
     return login(username, password)
 
 
-# CHECK IF USERNAME IS AVAILABLE
 def username_available(username):
+    """Check if the username is available."""
 
-    # Create a SQL query to check if the username exists
     sql = text("SELECT id FROM users WHERE username=:username")
-    
-    # Execute the query
     result = db.session.execute(sql, {"username":username})
-    
-    # Save the query result in a variable
     user = result.fetchone()
 
-    if user:
+    if user: 
         return False
-    else:
-        return True
-    
 
-# CHECKS THAT USER IS IN DATABASE
+    return True
+
+
 def user_in_db(user_id):
-    # Create a SQL query to check if the user_id exists
-    sql = text("SELECT id FROM users WHERE id=:user_id")
-    
-    # Execute the query
-    result = db.session.execute(sql, {"user_id":user_id})
+    """Check if the user_id exists in the database."""
 
-    # Save the query result in a variable
+    sql = text("SELECT id FROM users WHERE id=:user_id")    
+    result = db.session.execute(sql, {"user_id":user_id})
     user = result.fetchone()
 
-    if user:
+    if user: 
         return True
-    else:
-        return False
-    
 
-# CHECKS THAT USER IS LOGGED IN    
+    return False
+
+
 def user_is_logged_in(user_id):
-    if user_id and user_in_db(user_id): 
+    """Check if the user is logged in."""
+
+    if user_id and user_in_db(user_id):
         return True
-    else:
-        return False
+
+    return False
