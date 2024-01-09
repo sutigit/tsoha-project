@@ -9,14 +9,12 @@
 </head>
 
 <body>
-    <!-- NAVIGATION BAR -->
     <nav>
         <a href="/">
             <button>
                 Home
             </button>
         </a>
-
 
         {% if session.username %}
         <div>
@@ -46,7 +44,6 @@
         {% endif %}
     </nav>
 
-    <!-- GAME DETAILS SECTION -->
     <main>
         {% set game = game %}
         <section class="p-2">
@@ -83,7 +80,6 @@
             </div>
         </section>
 
-        <!-- COMMENT SECTION -->
         <section class="p-2">
             <h2>Comments</h2>
             <div>
@@ -133,7 +129,6 @@
                 </div>
                 {% endfor %}
 
-                <!-- default message -->
                 <div class="p-2 my-2 light-background">
                     <div>
                         <p>
