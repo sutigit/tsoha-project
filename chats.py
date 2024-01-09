@@ -70,5 +70,5 @@ def message_has_been_liked(message_id, user_id):
 
     if result.fetchone():
         return True
-    
+
     return False

@@ -113,7 +113,7 @@ def vote(game_id):
 
         games.vote(game_id, user_id)
         return redirect(request.referrer)
-    
+
     return redirect("/login")
 
 
@@ -206,5 +206,5 @@ def unlike(message_id):
 @app.route("/error")
 def error():
     """Render the error page."""
-    
+
     return render_template("error.html", error="Something went wrong :(")
