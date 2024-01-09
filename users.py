@@ -30,6 +30,7 @@ def login(username, password):
 
 def logout():
     """Log the user out."""
+    
     del session["user_id"]
     del session["username"]
     del session["csrf_token"]
@@ -44,7 +45,7 @@ def signup(username, password):
         sql = text("INSERT INTO users (username,password) VALUES (:username,:password)")
         db.session.execute(sql, {"username":username, "password":hash_value})
         db.session.commit()
-    except ConnectionError:
+    except SystemError:
         return False
 
     return login(username, password)
